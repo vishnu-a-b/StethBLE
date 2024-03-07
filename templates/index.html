@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="file"] {
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>File Upload</h1>
+    <form action="/" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".wav">
+        <br>
+        <!-- Add input text boxes for filter_order, lowcutf, and highcutf -->
+        <label for="filter_order">Filter Order:</label>
+        <input type="number" name="filter_order" id="filter_order" value="{% if data.filter_order %}{{ data.filter_order }}{% endif %}">
+        <br>
+        <label for="lowcutf">Lower cut off:</label>
+        <input type="number" name="lowcutf" id="lowcutf" step="0.01" value="{% if data.lowcutf %}{{ data.lowcutf }}{% endif %}">
+        <br>
+        <label for="highcutf">Higher cut off:</label>
+        <input type="number" name="highcutf" id="highcutf" step="0.01" value="{% if data.highcutf %}{{ data.highcutf }}{% endif %}">
+        <br>
+        <br>
+        <input type="submit" value="Upload">
+    </form>
+    
+    <!-- Display the plot image -->
+    <h2>Filtered Waveform Plot</h2>
+    <img src="{{ url_for('static', filename='plot.png') }}" alt="Filtered Waveform Plot">
+</body>
+</html>
